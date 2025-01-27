@@ -29,6 +29,15 @@ function App() {
     },
   ]);
 
+  // conditional render the Add Task component
+  const [showAddTask, setShowAddTask] = useState(false);
+
+  // toggle the add task component
+  const toggleAddTask = () => {
+    setShowAddTask(!showAddTask);
+  }
+
+  // add a new task
   const addTask = (taskName) => {
     const newTask = {
       id: tasks.length + 1,
@@ -36,14 +45,19 @@ function App() {
       isCompleted: false
     };
     setTasks([...tasks, newTask]);
+    setShowAddTask(false);
   }
 
   return (
     <div className="app">
       <h1>TO DO LIST! ✅</h1>
       <List tasks={tasks} setTasks={setTasks} />
-      <button>Add Task</button>
-      <AddTask addTask={addTask} />
+
+      {!showAddTask && (
+        <button onClick={toggleAddTask}>Add Task</button>
+      )}
+
+      {showAddTask && <AddTask addTask={addTask} />}
     </div>
   );
 }
@@ -74,6 +88,7 @@ function List({ tasks, setTasks }) {
             id={`task${task.id}`}
           />
           <label htmlFor={`task${task.id}`}>{task.name}</label>
+          <button>Edit</button>
           <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
         </li>
       ))}
