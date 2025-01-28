@@ -87,7 +87,7 @@ function List({ tasks, setTasks }) {
             onChange={() => handleCheckboxChange(task.id)}
             id={`task${task.id}`}
           />
-          <label htmlFor={`task${task.id}`}>{task.name}</label>
+          <label className={ task.isCompleted ? 'completed' : '' } htmlFor={`task${task.id}`}>{task.name}</label>
           <button>Edit</button>
           <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
         </li>
