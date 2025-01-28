@@ -48,6 +48,11 @@ function App() {
     setShowAddTask(false);
   }
 
+  // clear the list
+  const clearTasks = () => {
+    setTasks([]);
+  }
+
   return (
     <div className="app">
       <h1>TO DO LIST! ✅</h1>
@@ -58,6 +63,8 @@ function App() {
       )}
 
       {showAddTask && <AddTask addTask={addTask} />}
+
+      <button onClick={clearTasks}>Clear</button>
     </div>
   );
 }
@@ -88,7 +95,7 @@ function List({ tasks, setTasks }) {
             id={`task${task.id}`}
           />
           <label className={ task.isCompleted ? 'completed' : '' } htmlFor={`task${task.id}`}>{task.name}</label>
-          <button>Edit</button>
+          {/* <button>Edit</button> */}
           <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
         </li>
       ))}
